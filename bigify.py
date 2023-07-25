@@ -1,9 +1,6 @@
-import time
 import os
 import platform
 from loading import load
-
-finished = False
 if platform.system() == "Windows":
     os.system("cls")
 else:
@@ -243,22 +240,20 @@ bigarray = {
 
 a = input("What do you want to gigantify?\n")
 final = []
-first = True
+global first = True
 
 load("Gigantifying",len(a))
-
+load("Printing", 3)
+if platform.system() == "Windows":
+    os.system("cls")
+else:
+    os.system("clear")
 for letter in a:
     big_letter = bigarray.get(letter)
-    if big_letter is not None:
-        if first:
-            final = big_letter.copy()
-            first = False
-        else:
-            for i in range(len(final)):
-                if i < len(big_letter):
-                    spaces_needed = len(final[i]) - len(big_letter[i]) - 2
-                    final[i] += ' ' * spaces_needed + '  ' + big_letter[i]  # add spaces to make the line even
-                else:
-                    final[i] += ' ' * len(bigarray['a'][i])
+    if first:
+        final = big_letter.copy()
+        first = False
+    else:
+        final = final + "\r                " + big_letter.copy()
 
 print('\n'.join(final))
